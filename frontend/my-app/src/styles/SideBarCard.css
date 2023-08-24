@@ -1,0 +1,10 @@
+.sidebarcard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
+}
+

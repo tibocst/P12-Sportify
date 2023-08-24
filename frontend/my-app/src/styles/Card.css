@@ -1,0 +1,49 @@
+.card {
+    width: 100%;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    display: flex;
+    padding: 25px;
+    gap: 20px;
+}
+
+.card > div:nth-child(1) {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.card-icon_red {
+    background-color: #f8dede;
+
+}
+
+.card-icon_blue {
+    background-color: #c8e7fa;
+}
+
+.card-icon_yellow {
+    background-color: #faf1c8;
+}
+
+.card-icon_pink {
+    background-color: #fccbda;
+}
+
+.card-description {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.card-description > p {
+    margin: 0;
+}
+
+.card-description > p:nth-child(1) {
+    font-weight: bold;
+}
