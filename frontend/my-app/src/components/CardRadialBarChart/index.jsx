@@ -1,37 +1,58 @@
 import React from 'react';
-import { RadialBarChart, RadialBar, Legend, ResponsiveContainer } from 'recharts';
+import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
+import { USER_MAIN_DATA } from '../../datas/data.js'
+import '../../styles/CardRadialBarChart.css'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
-const data = [
-  {
-    name: 'unknow',
-    uv: 6.67,
-    pv: 4800,
-    fill: '#ffc658',
-  },
-];
 
-const style = {
-  top: '50%',
-  right: 0,
-  transform: 'translate(0, -50%)',
-  lineHeight: '24px',
-};
 
 function CardRadialBarChart() {
 
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+      fetch(`http://localhost:3000/user/${id}`)
+      .then(response => response.json())
+      .then(data => setData(data.data))
+      .catch( (err) => {
+        console.log(err);
+      })
+  }, [id]);
+
+  const formatedData = {
+    todayScore: (data?.todayScore * 100 || data?.score * 100),
+    fill: '#E60000'
+  }
+
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <RadialBarChart cx="50%" cy="50%" innerRadius="10%" outerRadius="80%" barSize={10} data={data}>
+      <div className='barChart'>
+        <p className='barChart-legend'>Score</p>
+        <div className='barChart-innerlayout'>
+          <h1>{formatedData?.todayScore} %</h1>
+          <h2>de votre objectif</h2>
+        </div>
+        <ResponsiveContainer width="100%" height={300}>
+        <RadialBarChart 
+          cx="50%" 
+          cy="50%" 
+          innerRadius="65%" 
+          outerRadius="80%" 
+          data={[formatedData]} 
+          startAngle={95} 
+          endAngle={95 + (formatedData?.todayScore * 360) / 100}
+          >
           <RadialBar
             minAngle={15}
-            label={{ position: 'insideStart', fill: '#fff' }}
-            background
-            clockWise
-            dataKey="uv"
+            label={false}
+            dataKey="todayScore"
+            cornerRadius={100}
           />
-          <Legend iconSize={10} layout="vertical" verticalAlign="middle" wrapperStyle={style} />
         </RadialBarChart>
       </ResponsiveContainer>
+      </div>
+      
     );
 }
 

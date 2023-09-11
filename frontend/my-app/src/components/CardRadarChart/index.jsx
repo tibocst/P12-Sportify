@@ -1,54 +1,57 @@
 import React from 'react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import '../../styles/CardRadarChart.css'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react'
 
-const data = [
-  {
-    subject: 'Math',
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: 'Chinese',
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'English',
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'Geography',
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: 'Physics',
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: 'History',
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
-];
+function mapData(perfs) {
+  return perfs?.data.map((perf) => {
+    switch (perf.kind) {
+      case 1:
+        perf.kind = "Cardio";
+        break;
+      case 2:
+        perf.kind = "Energie";
+        break;
+      case 3:
+        perf.kind = "Endurance";
+        break;
+      case 4:
+        perf.kind = "Force";
+        break;
+      case 5:
+        perf.kind = "Vitesse";
+        break;
+      case 6:
+        perf.kind = "Intensité";
+        break;
+      default:
+        break;
+    }
+    return perf
+  } )
+}
 
 function CardRadarChart() {
 
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+      fetch(`http://localhost:3000/user/${id}/performance`)
+      .then(response => response.json())
+      .then(data => setData(data.data))
+      .catch( (err) => {
+        console.log(err);
+      })
+  }, [id]);
+
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <PolarRadiusAxis />
-          <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+      <ResponsiveContainer width="100%" height={300}>
+        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={mapData(data)}>
+        <PolarGrid radialLines={false}/>
+          <PolarAngleAxis dataKey="kind" tick={{ fill: "white", fontSize: 15 }}/>
+          <Radar name={data?.id} dataKey="value" stroke="#E60000" fill="#E60000" fillOpacity={0.8} />
         </RadarChart>
       </ResponsiveContainer>
     );

@@ -28,6 +28,7 @@
 }
 
 .home-dashboard-stats-charts_bar {
+    border-radius: 10px;
     background-color: #eeeeee;
     flex: 1;
 }
@@ -39,7 +40,7 @@
 }
 
 .home-dashboard-stats-charts-cards > div {
-    background-color: #eeeeee;
+    border-radius: 10px;
     flex: 1;
 }
 
@@ -48,4 +49,12 @@
     flex-direction: column;
     flex: 1;
     justify-content: space-between;
+}
+
+.home-dashboard-stats-charts-cards_radar {
+    background-color: #282D30;
+}
+
+.home-dashboard-stats-charts-cards_radial {
+    background-color: #eeeeee;
 }

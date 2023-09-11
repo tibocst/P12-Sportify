@@ -1,11 +1,13 @@
 import '../../styles/Home.css'
-import {USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE} from '../../datas/data.js'
 import MenuSideBar from '../../components/MenuSideBar'
 import Card from '../../components/Card'
-import PieChart from '../../components/PieChart'
+import BarsChart from '../../components/BarsChart'
 import CardLineChart from '../../components/CardLineChart'
 import CardRadarChart from '../../components/CardRadarChart'
 import CardRadialBarChart from '../../components/CardRadialBarChart'
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { Navigate } from "react-router-dom";
 
 const calorie = require('../../assets/energy.png')
 const protein = require('../../assets/chicken.png')
@@ -13,39 +15,68 @@ const carbohydrate = require('../../assets/apple.png')
 const lipid = require('../../assets/cheeseburger.png')
 
 function Home() {
-  
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+      fetch(`http://localhost:3000/user/${id}`)
+      .then(response => response.json())
+      .then(data => setData(data.data))
+      .catch( (err) => {
+        console.log(err);
+      })
+  }, [id]);
+
+  if (data === "can not get user") {
+    return <Navigate to="*" replace={true} />;
+  }
+
   return (
     <div className="home">
       <MenuSideBar />
-      <div className='home-dashboard'>
-        <h1>Bonjour {USER_MAIN_DATA[0].userInfos.firstName}</h1>
+      <div className="home-dashboard">
+        <h1>Bonjour {data?.userInfos.firstName}</h1>
         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
-        <div className='home-dashboard-stats'>
-          <div className='home-dashboard-stats-charts'>
-            <div className='home-dashboard-stats-charts_bar'>
-              <PieChart />
+        <div className="home-dashboard-stats">
+          <div className="home-dashboard-stats-charts">
+            <div className="home-dashboard-stats-charts_bar">
+              <BarsChart />
             </div>
-            <div className='home-dashboard-stats-charts-cards'>
-              <div className='home-dashboard-stats-charts-cards_linear'>
+            <div className="home-dashboard-stats-charts-cards">
+              <div className="home-dashboard-stats-charts-cards_linear">
                 <CardLineChart />
               </div>
-              <div className='home-dashboard-stats-charts-cards_radar'>
+              <div className="home-dashboard-stats-charts-cards_radar">
                 <CardRadarChart />
               </div>
-              <div className='home-dashboard-stats-charts-cards_pie'>
+              <div className="home-dashboard-stats-charts-cards_radial">
                 <CardRadialBarChart />
               </div>
             </div>
           </div>
-          <div className='home-dashboard-stats-cards'>
-            <Card icon={calorie} count={USER_MAIN_DATA[0].keyData.calorieCount} type={"Calories"}/>
-            <Card icon={protein} count={USER_MAIN_DATA[0].keyData.proteinCount} type={"Proteines"}/>
-            <Card icon={carbohydrate} count={USER_MAIN_DATA[0].keyData.carbohydrateCount} type={"Glucides"}/>
-            <Card icon={lipid} count={USER_MAIN_DATA[0].keyData.lipidCount} type={"Lipides"}/>
+          <div className="home-dashboard-stats-cards">
+            <Card
+              icon={calorie}
+              count={data?.keyData.calorieCount}
+              type={"Calories"}
+            />
+            <Card
+              icon={protein}
+              count={data?.keyData.proteinCount}
+              type={"Proteines"}
+            />
+            <Card
+              icon={carbohydrate}
+              count={data?.keyData.carbohydrateCount}
+              type={"Glucides"}
+            />
+            <Card
+              icon={lipid}
+              count={data?.keyData.lipidCount}
+              type={"Lipides"}
+            />
           </div>
-          <div>
-            
-          </div>
+          <div></div>
         </div>
       </div>
     </div>

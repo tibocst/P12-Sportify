@@ -1,0 +1,39 @@
+.barChart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.barChart-legend {
+    position: absolute;
+    top: 8%;
+    left: 20%;
+    font-weight: bold;
+}
+
+.barChart-innerlayout {
+    position: absolute;
+    border-radius: 100%;
+    height: 175px;
+    width: 175px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.barChart-innerlayout > h2, .barChart-innerlayout > h1{
+    text-align: center;
+    margin: 0;
+}
+
+.barChart-innerlayout > h1 {
+    margin-top: 50px;
+}
+
+.barChart-innerlayout > h2 {
+    font-size: 1.2em;
+    width: 100px;
+    color: #74798C;
+}

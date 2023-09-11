@@ -1,0 +1,24 @@
+.barsChart-legend {
+    display: flex;
+    justify-content: space-between;
+}
+
+.barsChart-legend > div {
+    display: flex;
+    gap: 20px;
+}
+
+.barsChart-legend > div {
+    display: flex;
+    gap: 20px;
+}
+
+.custom-tooltip {
+    background-color: #E60000;
+    padding: 10px 15px;
+}
+
+.custom-tooltip > p {
+    color: white;
+    font-weight: 300;
+}
