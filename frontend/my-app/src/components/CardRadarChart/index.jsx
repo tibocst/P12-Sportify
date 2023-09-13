@@ -47,7 +47,7 @@ function CardRadarChart() {
   }, [id]);
 
     return (
-      <ResponsiveContainer width="100%" height={250}>
+      <ResponsiveContainer width="100%" height={300}>
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={mapData(data)}>
         <PolarGrid radialLines={false}/>
           <PolarAngleAxis dataKey="kind" tick={{ fill: "white", fontSize: 15 }}/>

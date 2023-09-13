@@ -32,7 +32,7 @@ function CardRadialBarChart() {
           <h1>{formatedData?.todayScore} %</h1>
           <h2>de votre objectif</h2>
         </div>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={300}>
         <RadialBarChart 
           cx="50%" 
           cy="50%" 

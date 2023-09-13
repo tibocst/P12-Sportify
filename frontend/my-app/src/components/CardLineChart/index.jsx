@@ -16,6 +16,15 @@ const CustomTooltip = ({ active, payload }) => {
   }
 };
 
+const arrayXAxisLabel = ["L","M","M","J","V","S","D"]
+
+function mapData(data) {
+  return data?.map((data, index) => {
+    data.day = arrayXAxisLabel[index]
+    return data
+  } )
+}
+
 function CardLineChart() {
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -32,9 +41,9 @@ function CardLineChart() {
   return (
     <>
       <p>Durée moyenne des sessions</p>
-      <ResponsiveContainer className="cardLineChart" width="100%" height={250}>
+      <ResponsiveContainer className="cardLineChart" width="100%" height={300}>
         <LineChart
-          data={data?.sessions}
+          data={mapData(data?.sessions)}
           margin={{
             top: 5,
             right: 30,

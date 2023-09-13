@@ -2,7 +2,7 @@
     background-color: black;
     display: flex;
     align-items: center;
-    height: 15%;
+    height: 10%;
 }
 
 .header > div:nth-child(2) {
@@ -11,7 +11,7 @@
 }
 
 .header-logo {
-    width: 350px;
+    width: 200px;
     margin: 20px;
 }
 
@@ -29,7 +29,7 @@
 
 @media (max-width: 1635px) {
     .header-logo {
-        width: 200px;
+        width: 150px;
         margin: 20px;
     }
 }

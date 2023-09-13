@@ -3,7 +3,7 @@
     justify-content: space-between;
     flex-direction: column;
     background-color: black;
-    flex-basis: 150px;
+    flex-basis: 100px;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -31,7 +31,6 @@
 
 @media (max-width: 1635px) {
     .menusidebar {
-        flex-basis: 150px;
         padding: 10px;
     }
 

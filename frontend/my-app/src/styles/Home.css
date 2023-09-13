@@ -1,8 +1,8 @@
 .home {
     display: flex;
     flex-direction: row;
-    height: 85%;
-    max-height: 85%;
+    height: 90%;
+    max-height: 90%;
 }
 
 .home-dashboard {
