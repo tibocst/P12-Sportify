@@ -1,5 +1,4 @@
 .card {
-    width: 100%;
     background-color: #eeeeee;
     border-radius: 10px;
     display: flex;
@@ -46,4 +45,10 @@
 
 .card-description > p:nth-child(1) {
     font-weight: bold;
+}
+
+@media (max-width: 1635px) {
+    .card {
+        width: 100%;
+    }
 }

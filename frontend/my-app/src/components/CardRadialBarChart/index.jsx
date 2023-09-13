@@ -1,6 +1,5 @@
 import React from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
-import { USER_MAIN_DATA } from '../../datas/data.js'
 import '../../styles/CardRadialBarChart.css'
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
@@ -33,7 +32,7 @@ function CardRadialBarChart() {
           <h1>{formatedData?.todayScore} %</h1>
           <h2>de votre objectif</h2>
         </div>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={250}>
         <RadialBarChart 
           cx="50%" 
           cy="50%" 

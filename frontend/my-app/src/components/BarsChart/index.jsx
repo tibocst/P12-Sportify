@@ -41,7 +41,7 @@ function BarsChart(){
             <p><img src={OVAL} alt="oval" /> Calories brûlées (kCal)</p>
           </div>
         </div>
-        <ResponsiveContainer height={300} width="100%">
+        <ResponsiveContainer width="100%" height={250}>
           <BarChart
             data={data?.sessions}
             margin={{

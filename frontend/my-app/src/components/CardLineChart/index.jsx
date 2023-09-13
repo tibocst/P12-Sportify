@@ -1,32 +1,20 @@
-import React from 'react';
-import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import React from "react";
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import "../../styles/CardLineChart.css";
 
-function CustomizedAxisTick(props) {
-    const { x, y, stroke, payload } = props;
-
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-35)">
-          {payload.value}
-        </text>
-      </g>
-    );
-}
-
-const CustomTooltip = ({active, payload}) => {
+const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
         <p>{`${payload[0].value}`}</p>
       </div>
-    )
+    );
   } else {
-    return null
+    return null;
   }
-}
-
+};
 
 function CardLineChart() {
   const { id } = useParams();
@@ -42,35 +30,47 @@ function CardLineChart() {
   }, [id]);
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart
-        data={data?.sessions}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <XAxis 
-        dataKey="day" 
-        axisLine={false}
-        tickLine={false}
-        stroke='#8884d8'
-        tick={<CustomizedAxisTick />} />
-        <Tooltip 
-          animationEasing="ease-out"
-          content={<CustomTooltip />}
-          wrapperStyle={{ outline: "none" }}/>
-        <Line
-          type="monotone"
-          dataKey="sessionLength"
-          stroke="#8884d8"
-          strokeWidth={2}
-          dot={false}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <>
+      <p>Durée moyenne des sessions</p>
+      <ResponsiveContainer className="cardLineChart" width="100%" height={250}>
+        <LineChart
+          data={data?.sessions}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <defs>
+            <linearGradient id="color" x1="0" y1="0" x2="0" y2="0">
+              <stop offset="5%" stopColor="#FFFFFF" stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis
+            dataKey="day"
+            axisLine={false}
+            tickLine={false}
+            tick={{ fill: "#FFFFFF", opacity: "0.5" }}
+          />
+          <Tooltip
+            animationEasing="ease-out"
+            content={<CustomTooltip />}
+            wrapperStyle={{ outline: "none" }}
+          />
+          <Line
+            type="basis"
+            dataKey="sessionLength"
+            stroke="#FFFFFF"
+            fill="url(#color)"
+            strokeWidth={3}
+            dot={false}
+            activeDot={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </>
   );
 }
 

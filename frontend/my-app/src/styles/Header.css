@@ -2,7 +2,7 @@
     background-color: black;
     display: flex;
     align-items: center;
-    height: 150px;
+    height: 15%;
 }
 
 .header > div:nth-child(2) {
@@ -25,4 +25,11 @@
     color: white;
     text-decoration: inherit;
     font-size: x-large
+}
+
+@media (max-width: 1635px) {
+    .header-logo {
+        width: 200px;
+        margin: 20px;
+    }
 }

@@ -1,6 +1,7 @@
 .barsChart-legend {
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;
 }
 
 .barsChart-legend > div {
@@ -8,9 +9,17 @@
     gap: 20px;
 }
 
-.barsChart-legend > div {
-    display: flex;
-    gap: 20px;
+.barsChart-legend > div > p {
+    font-weight: 500;
+    color: #74798C;
+}
+
+.barsChart-legend > div > p:nth-child(2) > img {
+    filter: invert(13%) sepia(82%) saturate(5811%) hue-rotate(360deg) brightness(86%) contrast(117%);
+}
+
+.barsChart-legend> p {
+    font-weight: 500;
 }
 
 .custom-tooltip {
