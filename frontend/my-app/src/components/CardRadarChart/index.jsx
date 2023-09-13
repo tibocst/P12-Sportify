@@ -3,6 +3,7 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } fro
 import '../../styles/CardRadarChart.css'
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
+import { getPerformance } from '../../api'
 
 function mapData(perfs) {
   return perfs?.data.map((perf) => {
@@ -37,14 +38,21 @@ function CardRadarChart() {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-      fetch(`http://localhost:3000/user/${id}/performance`)
-      .then(response => response.json())
-      .then(data => setData(data.data))
-      .catch( (err) => {
-        console.log(err);
-      })
-  }, [id]);
+  const fetchPerformance = async (id) => {
+    const response = await getPerformance(id); 
+    setData(response)
+  }
+  
+    useEffect(() => {
+      if (id) {
+        fetchPerformance(id)
+      }
+    }, [id]);
+  
+    if (!data) {
+      return null
+    }
+  
 
     return (
       <ResponsiveContainer width="100%" height={300}>

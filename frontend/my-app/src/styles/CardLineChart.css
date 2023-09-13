@@ -1,4 +1,4 @@
-.home-dashboard-stats-charts-cards_linear > p {
+.home-dashboard-stats-charts-cards_linear > div > p {
     position: absolute;
     font-size: 1.2em;
     color: #FFFFFF;
@@ -7,4 +7,14 @@
     width: 200px;
     top: 30px;
     left: 30px;
+}
+
+.custom-tooltip-linear {
+    background-color: white;
+    padding: 5px 10px;
+}
+
+.custom-tooltip-linear > p {
+    color: black;
+    font-weight: 400;
 }

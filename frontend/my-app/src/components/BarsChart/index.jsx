@@ -2,6 +2,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import '../../styles/BarsChart.css'
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
+import { getActivity } from '../../api';
 
 const OVAL = require('../../assets/Oval.png')
 
@@ -23,14 +24,21 @@ function BarsChart(){
   const { id } = useParams();
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-      fetch(`http://localhost:3000/user/${id}/activity`)
-      .then(response => response.json())
-      .then(data => setData(data.data))
-      .catch( (err) => {
-        console.log(err);
-      })
-  }, [id]);
+  const fetchActivity = async (id) => {
+  
+    const response = await getActivity(id); 
+      setData(response)
+  }
+  
+    useEffect(() => {
+      if (id) {
+        fetchActivity(id)
+      }
+    }, [id]);
+  
+    if (!data) {
+      return null
+    }
     
     return (
       <div className='barsChart'>

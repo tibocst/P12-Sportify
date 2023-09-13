@@ -1,49 +1,48 @@
-import '../../styles/Home.css'
-import MenuSideBar from '../../components/MenuSideBar'
-import Card from '../../components/Card'
-import BarsChart from '../../components/BarsChart'
-import CardLineChart from '../../components/CardLineChart'
-import CardRadarChart from '../../components/CardRadarChart'
-import CardRadialBarChart from '../../components/CardRadialBarChart'
+import "../../styles/Home.css";
+import MenuSideBar from "../../components/MenuSideBar";
+import Card from "../../components/Card";
+import BarsChart from "../../components/BarsChart";
+import CardLineChart from "../../components/CardLineChart";
+import CardRadarChart from "../../components/CardRadarChart";
+import CardRadialBarChart from "../../components/CardRadialBarChart";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { getUser } from '../../api'
+import { getUser } from "../../api";
 
-const calorie = require('../../assets/energy.png')
-const protein = require('../../assets/chicken.png')
-const carbohydrate = require('../../assets/apple.png')
-const lipid = require('../../assets/cheeseburger.png')
-
+const calorie = require("../../assets/energy.png");
+const protein = require("../../assets/chicken.png");
+const carbohydrate = require("../../assets/apple.png");
+const lipid = require("../../assets/cheeseburger.png");
 
 function Home() {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [error, setError] = useState(false);
 
-const fetchUser = async (id) => {
-  if (!id) {
-    return <Navigate to="/12" replace={true} />;
-  }
-
-  const response = await getUser(id); 
-  
-  if (response === "can not get user") {
-    return <Navigate to="/error" replace={true} />;
-  }
-  else {
-    setData(response)
-  }
-
-}
+  const fetchUser = async (id) => {
+    const response = await getUser(id);
+    if (response === "can not get user") {
+      setError(true)
+    } else {
+      setData(response);
+    }
+  };
 
   useEffect(() => {
     if (id) {
-      fetchUser(id)
+      fetchUser(id);
     }
   }, [id]);
 
+  if (!id) {
+    return <Navigate to="/12" replace={true} />;
+  }
+  if(error) {
+    return <Navigate to="/error" replace={true} />;
+  }
   if (!data) {
-    return null
+    return null;
   }
 
   return (
