@@ -20,8 +20,12 @@ function CardRadialBarChart() {
       })
   }, [id]);
 
+  if (!data) {
+    return null
+  }
+
   const formatedData = {
-    todayScore: (data?.todayScore * 100 || data?.score * 100),
+    todayScore: (data.todayScore * 100 || data.score * 100),
     fill: '#E60000'
   }
 
@@ -29,7 +33,7 @@ function CardRadialBarChart() {
       <div className='barChart'>
         <p className='barChart-legend'>Score</p>
         <div className='barChart-innerlayout'>
-          <h1>{formatedData?.todayScore} %</h1>
+          <h1>{formatedData.todayScore} %</h1>
           <h2>de votre objectif</h2>
         </div>
         <ResponsiveContainer width="100%" height={300}>
@@ -40,7 +44,7 @@ function CardRadialBarChart() {
           outerRadius="80%" 
           data={[formatedData]} 
           startAngle={95} 
-          endAngle={95 + (formatedData?.todayScore * 360) / 100}
+          endAngle={95 + (formatedData.todayScore * 360) / 100}
           >
           <RadialBar
             minAngle={15}

@@ -8,34 +8,49 @@ import CardRadialBarChart from '../../components/CardRadialBarChart'
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { Navigate } from "react-router-dom";
+import { getUser } from '../../api'
 
 const calorie = require('../../assets/energy.png')
 const protein = require('../../assets/chicken.png')
 const carbohydrate = require('../../assets/apple.png')
 const lipid = require('../../assets/cheeseburger.png')
 
+
 function Home() {
   const { id } = useParams();
   const [data, setData] = useState(null);
 
+const fetchUser = async (id) => {
+  if (!id) {
+    return <Navigate to="/12" replace={true} />;
+  }
+
+  const response = await getUser(id); 
+  
+  if (response === "can not get user") {
+    return <Navigate to="/error" replace={true} />;
+  }
+  else {
+    setData(response)
+  }
+
+}
+
   useEffect(() => {
-      fetch(`http://localhost:3000/user/${id}`)
-      .then(response => response.json())
-      .then(data => setData(data.data))
-      .catch( (err) => {
-        console.log(err);
-      })
+    if (id) {
+      fetchUser(id)
+    }
   }, [id]);
 
-  if (data === "can not get user") {
-    return <Navigate to="*" replace={true} />;
+  if (!data) {
+    return null
   }
 
   return (
     <div className="home">
       <MenuSideBar />
       <div className="home-dashboard">
-        <h1>Bonjour {data?.userInfos.firstName}</h1>
+        <h1>Bonjour {data.userInfos.firstName}</h1>
         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         <div className="home-dashboard-stats">
           <div className="home-dashboard-stats-charts">

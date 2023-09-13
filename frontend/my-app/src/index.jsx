@@ -12,7 +12,9 @@ root.render(
     <Router>
       <Header />
       <Routes>
+        <Route path="/" index element={<Home />} />
         <Route path="/:id" element={<Home />} />
+        <Route path="/error" element={<Error />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>
