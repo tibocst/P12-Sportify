@@ -10,7 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../../styles/CardLineChart.css";
-import { getSessions } from '../../api'
+import { getSessions } from "../../api";
 
 const arrayXAxisLabel = ["L", "M", "M", "J", "V", "S", "D"];
 
@@ -36,16 +36,16 @@ const ActiveDot = (props) => {
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M9 13.8607C11.2091 13.8607 13 12.0809 13 9.88545C13 7.68999 11.2091 5.91022 9 5.91022C6.79086 5.91022 5 7.68999 5 9.88545C5 12.0809 6.79086 13.8607 9 13.8607Z"
         fill="white"
       />
       <path
         d="M9 16.3607C12.5752 16.3607 15.5 13.4762 15.5 9.88545C15.5 6.29466 12.5752 3.41022 9 3.41022C5.42481 3.41022 2.5 6.29466 2.5 9.88545C2.5 13.4762 5.42481 16.3607 9 16.3607Z"
         stroke="white"
-        stroke-opacity="0.198345"
-        stroke-width="5"
+        strokeOpacity="0.198345"
+        strokeWidth="5"
       />
     </svg>
   );
@@ -59,29 +59,37 @@ function CardLineChart() {
   const [selectedValue, setSelectedValue] = useState(0);
 
   const fetchSessions = async (id) => {
-    const response = await getSessions(id); 
-    setData(response)
-  }
-  
-    useEffect(() => {
-      if (id) {
-        fetchSessions(id)
-      }
-    }, [id]);
+    const response = await getSessions(id);
+    setData(response);
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchSessions(id);
+    }
+  }, [id]);
 
   const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length > 0) {
-      setActive(true);
-      setSelectedValue(payload[0].payload.idx);
+    useEffect(() => {
+      if (active && payload && payload.length > 0) {
+        setActive(true);
+        setSelectedValue(payload[0].payload.idx);
+      }
+    }, [active, payload]);
 
+    useEffect(() => {
+      if (!active) {
+        setActive(false);
+        setSelectedValue(data.sessions.length - 1);
+      }
+    }, [active]);
+
+    if (active && payload && payload.length > 0) {
       return (
         <div className="custom-tooltip-linear">
           <p>{`${payload[0].value} min`}</p>
         </div>
       );
-    } else {
-      setActive(false);
-      setSelectedValue(data.sessions.length - 1);
     }
   };
 
