@@ -49,9 +49,9 @@ function CardRadarChart() {
       }
     }, [id]);
   
-    if (!data) {
-      return null
-    }
+    if (!data || data === "can not get user") {
+      return (null);
+    } else {
   
 
     return (
@@ -63,6 +63,7 @@ function CardRadarChart() {
         </RadarChart>
       </ResponsiveContainer>
     );
+  }
 }
 
 export default CardRadarChart;

@@ -13,9 +13,9 @@ function Header() {
         <div>
           <nav className='header-nav'> 
             <Link to="/">Accueil</Link>
-            <Link to="*">Profil</Link>
-            <Link to="*">Réglage</Link>
-            <Link to="*">Communauté</Link>
+            <Link to="/*">Profil</Link>
+            <Link to="/*">Réglage</Link>
+            <Link to="/*">Communauté</Link>
           </nav>
         </div>
       </div>

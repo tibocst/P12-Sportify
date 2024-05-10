@@ -21,9 +21,9 @@ function CardRadialBarChart() {
       }
     }, [id]);
   
-    if (!data) {
-      return null
-    }
+    if (!data || data === "can not get user") {
+      return (null);
+    } else {
 
   const formatedData = {
     todayScore: data.todayScore * 100 || data.score * 100,
@@ -58,6 +58,7 @@ function CardRadialBarChart() {
       </ResponsiveContainer>
     </div>
   );
+}
 }
 
 export default CardRadialBarChart;

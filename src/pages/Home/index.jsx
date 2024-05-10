@@ -36,7 +36,7 @@ function Home() {
   }, [id]);
 
   if (!id) {
-    return <Navigate to="/12" replace={true} />;
+    return <Navigate to="user/12" replace={true} />;
   }
   if(error) {
     return <Navigate to="/error" replace={true} />;

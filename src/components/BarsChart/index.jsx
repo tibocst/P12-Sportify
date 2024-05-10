@@ -36,11 +36,10 @@ function BarsChart(){
       }
     }, [id]);
   
-    if (!data) {
-      return null
-    }
-    
-    return (
+    if (!data || data === "can not get user") {
+      return (null);
+    } else {
+      return (
       <div className='barsChart'>
         <div className='barsChart-legend'>
           <p>Activité quotidienne</p>
@@ -91,6 +90,7 @@ function BarsChart(){
         </ResponsiveContainer>
       </div>
       );
+    }
 }
 
 export default BarsChart;

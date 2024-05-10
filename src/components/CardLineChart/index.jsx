@@ -93,9 +93,9 @@ function CardLineChart() {
     }
   };
 
-  if (!data) {
-    return null;
-  }
+  if (!data || data === "can not get user") {
+    return (null);
+  } else {
 
   return (
     <div style={{ position: "relative" }}>
@@ -177,6 +177,7 @@ function CardLineChart() {
       </ResponsiveContainer>
     </div>
   );
+}
 }
 
 export default CardLineChart;
