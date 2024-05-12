@@ -1,0 +1,35 @@
+.explicationSite {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 300px;
+    background-color: white;
+    border: 2px solid #00000038;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 5px;
+    box-shadow: rgba(48, 49, 51, 0.1) 0px 8px 16px 4px;
+}
+
+.explicationSite > div:nth-child(1) {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    height: 12px;
+    width: 12px;
+    cursor: pointer;
+}
+
+.explicationSite > h1 {
+    font-size: 1em;
+    color: #494949;
+    margin: 0;
+}
+
+.explicationSite > p {
+    font-size: 0.8em;
+    opacity: 80%;
+    margin: 0;
+}

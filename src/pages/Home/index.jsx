@@ -7,6 +7,7 @@ import CardRadarChart from "../../components/CardRadarChart";
 import CardRadialBarChart from "../../components/CardRadialBarChart";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import { Navigate } from "react-router-dom";
 import { getUser } from "../../api";
 
@@ -23,7 +24,7 @@ function Home() {
   const fetchUser = async (id) => {
     const response = await getUser(id);
     if (response === "can not get user") {
-      setError(true)
+      setError(true);
     } else {
       setData(response);
     }
@@ -38,18 +39,39 @@ function Home() {
   if (!id) {
     return <Navigate to="user/12" replace={true} />;
   }
-  if(error) {
+  if (error) {
     return <Navigate to="/error" replace={true} />;
   }
   if (!data) {
-    return null;
+    return (
+      <div className="home">
+        <MenuSideBar />
+        <div className="home-dashboard">
+          <div className="loader">
+            <ClipLoader
+              color="black"
+              size={50}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+              className="loader"
+              speedMultiplier={0.3}
+            />
+            <p>
+              Veuillez patienter pendant l'affichage des données, cela peut
+              prendre entre 30 et 50 secondes en raison du démarage de l'API par
+              Render.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="home">
       <MenuSideBar />
       <div className="home-dashboard">
-        <h1>Bonjour {data.userInfos.firstName}</h1>
+        <h1>Bonjour {data?.userInfos.firstName}</h1>
         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
         <div className="home-dashboard-stats">
           <div className="home-dashboard-stats-charts">

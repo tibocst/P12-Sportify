@@ -5,12 +5,22 @@
     max-height: 90%;
 }
 
+
+
 .home-dashboard {
     display: flex;
     flex-direction: column;
     flex: 1;
     padding: 25px 75px;
     gap: 20px;
+    justify-content: center;
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 .home-dashboard > h1, .home-dashboard > p {
