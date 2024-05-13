@@ -14,3 +14,9 @@ body {
 #root {
     height: 100%;
 }
+
+@media (max-width: 1635px) {
+    #root{
+        height:fit-content;
+    }
+}

@@ -1,7 +1,12 @@
+div:has(> .explicationSite) {
+    position: relative;
+    overflow-x: hidden;
+}
+
 .explicationSite {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 30px;
     width: 300px;
@@ -11,6 +16,7 @@
     padding: 15px;
     gap: 5px;
     box-shadow: rgba(48, 49, 51, 0.1) 0px 8px 16px 4px;
+    z-index: 10000;
 }
 
 .explicationSite > div:nth-child(1) {
@@ -33,3 +39,4 @@
     opacity: 80%;
     margin: 0;
 }
+
